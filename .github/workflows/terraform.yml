@@ -1,10 +1,31 @@
+
 name: Terraform
+
 on: [push, pull_request]
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-      - run: terraform init
-      - run: terraform validate
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AVIATRIX_USERNAME: ${{ secrets.AVIATRIX_USERNAME }}
+          AVIATRIX_PASSWORD: ${{ secrets.AVIATRIX_PASSWORD }}
+          AVIATRIX_CONTROLLER_IP: ${{ secrets.AVIATRIX_CONTROLLER_IP }}
+
