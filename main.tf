@@ -9,3 +9,5 @@ resource "aws_instance" "my_ec2" {
   }
 }
 
+
+# Added for ACE Automation certification
